@@ -68,6 +68,15 @@ nmap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 set hlsearch
 
+" Set indent = 4 spaces
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" Normal backspace
+set backspace=2
+
 " CtrlP configuration
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -87,7 +96,7 @@ set autochdir
 
 " Start Nerdtree on startup UNLESS node is a directory
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if !exists("s:std_in") && (argc() == 0 || (argc() == 1 && !isdirectory("alist[1]"))) | NERDTree | wincmd p | endif
+autocmd VimEnter * if !exists("s:std_in") && (argc() == 0 || (argc() == 1 && !isdirectory("s:alist[1]"))) | NERDTree | wincmd p | endif
 
 " Quit NERDTree if it is the last buffer open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
