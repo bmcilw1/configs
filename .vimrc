@@ -22,6 +22,7 @@ Plugin 'honza/vim-snippets' " Snippets are separated from the engine.
 Plugin 'croaker/mustang-vim' "Love those colors
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
+Plugin 'joonty/vdebug'
 
 "Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
