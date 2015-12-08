@@ -19,8 +19,8 @@ Plugin 'gmarik/Vundle.vim'
 "Ultisnips if python is available
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets' " Snippets are separated from the engine.
-Plugin 'croaker/mustang-vim' "Love those colors
-Plugin 'scrooloose/nerdtree'
+Plugin 'croaker/mustang-vim' " Love those colors
+"Plugin 'scrooloose/nerdtree' " replaced by fuzzy finder
 Plugin 'kien/ctrlp.vim'
 Plugin 'joonty/vdebug'
 
@@ -95,9 +95,9 @@ let g:UltiSnipsEditSplit="vertical"
 " Make currently opened file the current open directory on bash
 set autochdir
 
-" Start Nerdtree on startup UNLESS node is a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if !exists("s:std_in") && (argc() == 0 || (argc() == 1 && !isdirectory("s:alist[1]"))) | NERDTree | wincmd p | endif
+" Start Nerdtree on startup UNLESS node is a directory -- Tiral - go fuzzy!
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if !exists("s:std_in") && (argc() == 0 || (argc() == 1 && !isdirectory("s:alist[1]"))) | NERDTree | wincmd p | endif
 
 " Quit NERDTree if it is the last buffer open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
