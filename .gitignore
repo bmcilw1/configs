@@ -1,0 +1,8 @@
+# Ignore All
+*
+
+# Except these
+!.vimrc
+!.inputrc
+!.bash_profile
+!.gitignore
