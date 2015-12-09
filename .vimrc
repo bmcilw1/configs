@@ -16,12 +16,14 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 
-"Ultisnips if python is available
+"Core
+Plugin 'croaker/mustang-vim' " Love those colors
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets' " Snippets are separated from the engine.
-Plugin 'croaker/mustang-vim' " Love those colors
-"Plugin 'scrooloose/nerdtree' " replaced by fuzzy finder
 Plugin 'kien/ctrlp.vim'
+
+"Ultisnips if python is available
+"Plugin 'scrooloose/nerdtree' " replaced by fuzzy finder
 Plugin 'joonty/vdebug'
 
 "Plugin 'tpope/vim-fugitive'
@@ -81,6 +83,7 @@ set backspace=2
 " CtrlP configuration
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_show_hidden = 1
 
 " Ultisnipps config
 
