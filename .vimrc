@@ -12,64 +12,54 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-
-"Core
+" Core
 Plugin 'croaker/mustang-vim' " Love those colors
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets' " Snippets are separated from the engine.
+Plugin 'tpope/vim-surround' " Essential
 Plugin 'kien/ctrlp.vim'
 
-"Ultisnips if python is available
-"Plugin 'scrooloose/nerdtree' " replaced by fuzzy finder
-Plugin 'joonty/vdebug'
+" Keepers
+Plugin 'scrooloose/nerdtree' " replaced by fuzzy finder
+Plugin 'tpope/vim-fugitive' " Git in vim
+Plugin 'SirVer/ultisnips' " Python dependant
+Plugin 'honza/vim-snippets' " Snippets are separated from the engine.
 
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
+" Experimental
+"Plugin 'rstacruz/sparkup' " html code expander... can it be done in Utilisnips?
 
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-"
+
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 " see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 "__________________________________________________________________________________________
 
 " My colors
+if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+  set t_Co=256
+endif
 colors mustang
-let &t_Co=256
 syntax enable
-" Make shell behave like my command prompt - load the rc's 
-set shellcmdflag=-ic  
-" improve buffer-update speed
-set ttyfast
-" I'm ok with hidden buffers. No warning flags plz
-set hidden
-" Set mapleader, backslash is the default 
-"let mapleader = '\\'
+"let &t_Co=256
+
+set shellcmdflag=-ic  " Make shell behave like my command prompt - load the rc's 
+set ttyfast " improve buffer-update speed
+
+set hidden " I'm ok with hidden buffers. No warning flags plz
+
+let mapleader = " " " Set mapleader, backslash is the default 
+
 " Show invisiable characters, tab and new line
-nmap <leader>l :set list!<CR>
+nmap <leader>l :set list!<CR> 
 set listchars=tab:▸\ ,eol:¬
+
 set hlsearch
+nmap <leader>s :nohlsearch<CR>
 
 " Set indent = 4 spaces
 filetype plugin indent on
@@ -77,30 +67,22 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" Normal backspace
-set backspace=2
+"set backspace=2 " Normal backspace
 
-" CtrlP configuration
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_show_hidden = 1
 
-" Ultisnipps config
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<tab>" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+set autochdir " Make currently opened file the current open directory on bash
 
-" Make currently opened file the current open directory on bash
-set autochdir
-
-" Start Nerdtree on startup UNLESS node is a directory -- Tiral - go fuzzy!
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if !exists("s:std_in") && (argc() == 0 || (argc() == 1 && !isdirectory("s:alist[1]"))) | NERDTree | wincmd p | endif
+"autocmd StdinReadPre * let s:std_in=1 " Start Nerdtree on startup UNLESS node is a directory -- Tiral - go fuzzy!
+"autocmd VimEnter * if !exists("s:std_in") && (argc() == 0 || (argc() == 1 && !isdirectory("s:alist[1]"))) | NERDTree | wincmd p | endif 
+nmap <leader>n :NERDTreeToggle<CR>
 
 " Quit NERDTree if it is the last buffer open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
