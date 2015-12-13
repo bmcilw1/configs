@@ -23,7 +23,8 @@ Plugin 'tpope/vim-fugitive' " Git in vim
 Plugin 'SirVer/ultisnips' " Python dependant
 Plugin 'honza/vim-snippets' " Snippets are separated from the engine.
 
-" Experimental
+" Experimental - to try
+"Plugin 'justinmk/vim-sneak'
 "Plugin 'rstacruz/sparkup' " html code expander... can it be done in Utilisnips?
 
 call vundle#end()            " required
@@ -58,8 +59,9 @@ let mapleader = " " " Set mapleader, backslash is the default
 nmap <leader>l :set list!<CR> 
 set listchars=tab:▸\ ,eol:¬
 
+" Toggle highlighting on/off, and show current value.
 set hlsearch
-nmap <leader>s :nohlsearch<CR>
+noremap <leader>s :set hlsearch! hlsearch?<CR>
 
 " Set indent = 4 spaces
 filetype plugin indent on
