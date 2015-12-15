@@ -4,13 +4,16 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Instal plugins straight into .vim please
+call vundle#begin('~/.vim')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+
+" Personal .vim files
+" Plugin 'bmcilw1/my.vim'
 
 " Core
 Plugin 'croaker/mustang-vim' " Love those colors
@@ -22,6 +25,7 @@ Plugin 'scrooloose/nerdtree' " replaced by fuzzy finder
 Plugin 'tpope/vim-fugitive' " Git in vim
 Plugin 'SirVer/ultisnips' " Python dependant
 Plugin 'honza/vim-snippets' " Snippets are separated from the engine.
+Plugin 'mattn/emmet-vim' " Snippets are separated from the engine.
 
 " Experimental - to try
 "Plugin 'justinmk/vim-sneak'
@@ -40,6 +44,10 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 "__________________________________________________________________________________________
 
+" TODO: Make a github repo for personalized snippets, manage it via vundle.
+" Git push after updating a snippet
+" Make seperate githup repo for spellcheck file, managed via vundle 
+
 " My colors
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
@@ -51,17 +59,7 @@ syntax enable
 set shellcmdflag=-ic  " Make shell behave like my command prompt - load the rc's 
 set ttyfast " improve buffer-update speed
 
-set hidden " I'm ok with hidden buffers. No warning flags plz
-
-let mapleader = " " " Set mapleader, backslash is the default 
-
-" Show invisiable characters, tab and new line
-nmap <leader>l :set list!<CR> 
-set listchars=tab:▸\ ,eol:¬
-
-" Toggle highlighting on/off, and show current value.
-set hlsearch
-noremap <leader>s :set hlsearch! hlsearch?<CR>
+"set hidden " I'm ok with hidden buffers. No warning flags plz
 
 " Set indent = 4 spaces
 filetype plugin indent on
@@ -69,22 +67,95 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_leader_key='<C-y>'
+
+let mapleader = " " " Set mapleader, backslash is the default 
+
+inoremap ;; <esc>
+ 
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" Show invisible characters, tab and new line
+nnoremap <leader>l :set list!<CR> 
+set listchars=tab:▸\ ,eol:¬
+
+" Toggle highlighting on/off, and show current value.
+nnoremap <leader>hl :set hlsearch! hlsearch?<CR>
+
+nnoremap <leader>Q :q!<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>wq :wq<CR>
+nnoremap <leader>w :w<CR>
+
+" Deals with text wrapping
+noremap <silent> <Leader>wr :call ToggleWrap()<CR>
+function! ToggleWrap()
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+    set virtualedit=all
+    silent! nunmap <buffer> <Up>
+    silent! nunmap <buffer> <Down>
+    silent! nunmap <buffer> <Home>
+    silent! nunmap <buffer> <End>
+    silent! iunmap <buffer> <Up>
+    silent! iunmap <buffer> <Down>
+    silent! iunmap <buffer> <Home>
+    silent! iunmap <buffer> <End>
+    silent! iunmap <buffer> k
+    silent! iunmap <buffer> j
+    silent! iunmap <buffer> 0
+    silent! iunmap <buffer> $
+
+  else
+    echo "Wrap ON"
+    setlocal wrap linebreak nolist
+    set virtualedit=
+    setlocal display+=lastline
+    noremap  <buffer> <silent> <Up>   gk
+    noremap  <buffer> <silent> <Down> gj
+    noremap  <buffer> <silent> <Home> g<Home>
+    noremap  <buffer> <silent> <End>  g<End>
+    inoremap <buffer> <silent> <Up>   <C-o>gk
+    inoremap <buffer> <silent> <Down> <C-o>gj
+    inoremap <buffer> <silent> <Home> <C-o>g<Home>
+    inoremap <buffer> <silent> <End>  <C-o>g<End>
+    noremap  <buffer> <silent> k gk
+    noremap  <buffer> <silent> j gj
+    noremap  <buffer> <silent> 0 g0
+    noremap  <buffer> <silent> $ g$
+    onoremap <silent> j gj
+    onoremap <silent> k gk
+  endif
+endfunction
+silent call ToggleWrap()
+silent call ToggleWrap()
+
 "set backspace=2 " Normal backspace
 
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_show_hidden = 1
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>r :CtrlPMRU<CR>
+nnoremap <leader>p :CtrlP<CR>
+
+setlocal spell! spelllang=en_us 
+nnoremap <leader>sp :setlocal spell! spelllang=en_us spell?<CR>
 
 let g:UltiSnipsExpandTrigger="<tab>" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsSnippetDir="~/.vim/myUltisnips"
+nnoremap <leader>eu :UltiSnipsEdit!<CR>
 
 set autochdir " Make currently opened file the current open directory on bash
 
 "autocmd StdinReadPre * let s:std_in=1 " Start Nerdtree on startup UNLESS node is a directory -- Tiral - go fuzzy!
 "autocmd VimEnter * if !exists("s:std_in") && (argc() == 0 || (argc() == 1 && !isdirectory("s:alist[1]"))) | NERDTree | wincmd p | endif 
-nmap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 " Quit NERDTree if it is the last buffer open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
