@@ -67,6 +67,14 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+augroup vimrc
+  autocmd!
+  au BufReadPre * setlocal foldmethod=indent
+  "au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+augroup END
+
+set noswapfile " Prevent vim from creating unwanted temp files - I got vcs
+
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-y>'
@@ -88,7 +96,7 @@ nnoremap <leader>hl :set hlsearch! hlsearch?<CR>
 nnoremap <leader>Q :q!<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>wq :wq<CR>
-nnoremap <leader>w :w<CR>
+nnoremap <leader>ww :w<CR>
 
 " Deals with text wrapping
 noremap <silent> <Leader>wr :call ToggleWrap()<CR>
@@ -137,9 +145,9 @@ silent call ToggleWrap()
 "set backspace=2 " Normal backspace
 
 let g:ctrlp_show_hidden = 1
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>r :CtrlPMRU<CR>
-nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>pb :CtrlPBuffer<CR>
+nnoremap <leader>pr :CtrlPMRU<CR>
+nnoremap <leader>pp :CtrlP<CR>
 
 setlocal spell! spelllang=en_us 
 nnoremap <leader>sp :setlocal spell! spelllang=en_us spell?<CR>
