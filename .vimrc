@@ -4,32 +4,33 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" Instal plugins straight into .vim please
-call vundle#begin('~/.vim')
+"call vundle#begin('~/.vim')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " Personal .vim files
 " Plugin 'bmcilw1/my.vim'
 
 " Core
-Plugin 'croaker/mustang-vim' " Love those colors
+"Plugin 'croaker/mustang-vim' " Love those colors
+Plugin 'bmcilw1/my-mustang-vim'
 Plugin 'tpope/vim-surround' " Essential
+Plugin 'tpope/vim-fugitive' " Git in vim
+Plugin 'tpope/vim-unimpaired' " For navigating quickfix
 Plugin 'kien/ctrlp.vim'
 
 " Keepers
 Plugin 'scrooloose/nerdtree' " replaced by fuzzy finder
-Plugin 'tpope/vim-fugitive' " Git in vim
 Plugin 'SirVer/ultisnips' " Python dependant
 Plugin 'honza/vim-snippets' " Snippets are separated from the engine.
-Plugin 'mattn/emmet-vim' " Snippets are separated from the engine.
+Plugin 'mattn/emmet-vim'
 
 " Experimental - to try
 "Plugin 'justinmk/vim-sneak'
-"Plugin 'rstacruz/sparkup' " html code expander... can it be done in Utilisnips?
+Plugin 'gregsexton/gitv'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -46,13 +47,13 @@ filetype plugin indent on    " required
 
 " TODO: Make a github repo for personalized snippets, manage it via vundle.
 " Git push after updating a snippet
-" Make seperate githup repo for spellcheck file, managed via vundle 
+" Make seperate github repo for spellcheck file, managed via vundle 
 
 " My colors
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
 endif
-colors mustang
+colors mustangpp
 syntax enable
 "let &t_Co=256
 
@@ -66,6 +67,7 @@ filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set ff=unix
 
 augroup vimrc
   autocmd!
@@ -90,57 +92,15 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>l :set list!<CR> 
 set listchars=tab:▸\ ,eol:¬
 
+set lazyredraw " stop vim redraw during complex operations
+
 " Toggle highlighting on/off, and show current value.
 nnoremap <leader>hl :set hlsearch! hlsearch?<CR>
 
 nnoremap <leader>Q :q!<CR>
 nnoremap <leader>q :q<CR>
-nnoremap <leader>wq :wq<CR>
-nnoremap <leader>ww :w<CR>
-
-" Deals with text wrapping
-noremap <silent> <Leader>wr :call ToggleWrap()<CR>
-function! ToggleWrap()
-  if &wrap
-    echo "Wrap OFF"
-    setlocal nowrap
-    set virtualedit=all
-    silent! nunmap <buffer> <Up>
-    silent! nunmap <buffer> <Down>
-    silent! nunmap <buffer> <Home>
-    silent! nunmap <buffer> <End>
-    silent! iunmap <buffer> <Up>
-    silent! iunmap <buffer> <Down>
-    silent! iunmap <buffer> <Home>
-    silent! iunmap <buffer> <End>
-    silent! iunmap <buffer> k
-    silent! iunmap <buffer> j
-    silent! iunmap <buffer> 0
-    silent! iunmap <buffer> $
-
-  else
-    echo "Wrap ON"
-    setlocal wrap linebreak nolist
-    set virtualedit=
-    setlocal display+=lastline
-    noremap  <buffer> <silent> <Up>   gk
-    noremap  <buffer> <silent> <Down> gj
-    noremap  <buffer> <silent> <Home> g<Home>
-    noremap  <buffer> <silent> <End>  g<End>
-    inoremap <buffer> <silent> <Up>   <C-o>gk
-    inoremap <buffer> <silent> <Down> <C-o>gj
-    inoremap <buffer> <silent> <Home> <C-o>g<Home>
-    inoremap <buffer> <silent> <End>  <C-o>g<End>
-    noremap  <buffer> <silent> k gk
-    noremap  <buffer> <silent> j gj
-    noremap  <buffer> <silent> 0 g0
-    noremap  <buffer> <silent> $ g$
-    onoremap <silent> j gj
-    onoremap <silent> k gk
-  endif
-endfunction
-silent call ToggleWrap()
-silent call ToggleWrap()
+nnoremap <leader>w :w<CR>
+nnoremap <leader>h :hide<CR>
 
 "set backspace=2 " Normal backspace
 
@@ -150,7 +110,6 @@ nnoremap <leader>pr :CtrlPMRU<CR>
 nnoremap <leader>pp :CtrlP<CR>
 
 setlocal spell! spelllang=en_us 
-nnoremap <leader>sp :setlocal spell! spelllang=en_us spell?<CR>
 
 let g:UltiSnipsExpandTrigger="<tab>" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
