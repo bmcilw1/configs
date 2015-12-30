@@ -16,7 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Core
 "Plugin 'croaker/mustang-vim' " Love those colors
-Plugin 'bmcilw1/my-mustang-vim'
+Plugin 'bmcilw1/mustang-vim'
 Plugin 'tpope/vim-surround' " Essential
 Plugin 'tpope/vim-fugitive' " Git in vim
 Plugin 'tpope/vim-unimpaired' " For navigating quickfix
@@ -26,11 +26,13 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree' " replaced by fuzzy finder
 Plugin 'SirVer/ultisnips' " Python dependant
 Plugin 'honza/vim-snippets' " Snippets are separated from the engine.
-Plugin 'mattn/emmet-vim'
+Plugin 'mattn/emmet-vim' " html/css parser engine - this or snippets?
 
 " Experimental - to try
 "Plugin 'justinmk/vim-sneak'
 Plugin 'gregsexton/gitv'
+"Plugin 'tpope/vim-commentary' " which to use?
+"Plugin 'tomtom/tcomment_vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -53,14 +55,14 @@ filetype plugin indent on    " required
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
 endif
-colors mustangpp
+colors mustang
 syntax enable
 "let &t_Co=256
 
 set shellcmdflag=-ic  " Make shell behave like my command prompt - load the rc's 
 set ttyfast " improve buffer-update speed
 
-"set hidden " I'm ok with hidden buffers. No warning flags plz
+"set hidden " I'm ok with hidden buffers. No warning flags please
 
 " Set indent = 4 spaces
 filetype plugin indent on
