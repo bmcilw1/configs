@@ -1,7 +1,11 @@
 alias ll="ls -laF"
 alias la="ls -aF"
 alias cl="clear"
-alias Glogg="git log --graph --oneline --decorate"
+alias gl="git log --graph --oneline --decorate"
+alias gb="git branch"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
 alias vi="vim"
 
 if [ -f ~/.bashrc ]; then
