@@ -71,11 +71,11 @@ set shiftwidth=4
 set expandtab
 set ff=unix
 
-augroup vimrc
-  autocmd!
-  au BufReadPre * setlocal foldmethod=indent
-  "au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-augroup END
+" augroup vimrc
+"   autocmd!
+"   au BufReadPre * setlocal foldmethod=indent
+"   "au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+" augroup END
 
 set noswapfile " Prevent vim from creating unwanted temp files - I got vcs
 
@@ -85,6 +85,7 @@ let g:user_emmet_leader_key='<C-y>'
 
 let mapleader = " " " Set mapleader, backslash is the default 
 
+set timeoutlen=350 ttimeoutlen=0 "Timeout for waiting for multiple keys for bindings
 inoremap ;; <esc>
  
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
@@ -99,6 +100,7 @@ set lazyredraw " stop vim redraw during complex operations
 " Toggle highlighting on/off, and show current value.
 nnoremap <leader>hl :set hlsearch! hlsearch?<CR>
 
+" File tasks
 nnoremap <leader>Q :q!<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
@@ -111,11 +113,11 @@ nnoremap <leader>pb :CtrlPBuffer<CR>
 nnoremap <leader>pr :CtrlPMRU<CR>
 nnoremap <leader>pp :CtrlP<CR>
 
-setlocal spell! spelllang=en_us 
+setlocal spell! spelllang=en_us "How two spel?
 
 let g:UltiSnipsExpandTrigger="<tab>" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsSnippetDir="~/.vim/myUltisnips"
 nnoremap <leader>eu :UltiSnipsEdit!<CR>
