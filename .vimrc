@@ -11,12 +11,21 @@ call plug#begin('~/.vim/bundle')
 Plug 'bmcilw1/mustang-vim'
 Plug 'tpope/vim-surround' " Essential
 Plug 'tpope/vim-fugitive'
-" , { 'on': 'Gstatus' } " Git in vim
 Plug 'tpope/vim-unimpaired' " For navigating quickfix
 Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
 
 " Keepers
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " replaced by fuzzy finder
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " mostly replaced by fuzzy finder
+augroup nerd_loader
+  autocmd!
+  autocmd VimEnter * silent! autocmd! FileExplorer
+  autocmd BufEnter,BufNew *
+        \  if isdirectory(expand('<amatch>'))
+        \|   call plug#load('nerdtree')
+        \|   execute 'autocmd! nerd_loader'
+        \| endif
+augroup END
+
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
 "Plug 'mattn/emmet-vim' " html/css parser engine - this or snippets?
 
