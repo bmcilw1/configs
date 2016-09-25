@@ -1,68 +1,48 @@
-"__________________________________________________________________________________________
-" Vundle plugin Manager
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Brian McIlwain
+" .vimrc
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-"call vundle#begin('~/.vim')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Plugins by vim-plug
+call plug#begin('~/.vim/bundle')
 
 " Personal .vim files
-" Plugin 'bmcilw1/my.vim'
+" Plug 'bmcilw1/my.vim'
 
 " Core
-"Plugin 'croaker/mustang-vim' " Love those colors
-Plugin 'bmcilw1/mustang-vim'
-Plugin 'tpope/vim-surround' " Essential
-Plugin 'tpope/vim-fugitive' " Git in vim
-Plugin 'tpope/vim-unimpaired' " For navigating quickfix
-Plugin 'kien/ctrlp.vim'
+Plug 'bmcilw1/mustang-vim'
+Plug 'tpope/vim-surround' " Essential
+Plug 'tpope/vim-fugitive'
+" , { 'on': 'Gstatus' } " Git in vim
+Plug 'tpope/vim-unimpaired' " For navigating quickfix
+Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
 
 " Keepers
-Plugin 'scrooloose/nerdtree' " replaced by fuzzy finder
-Plugin 'SirVer/ultisnips' " Python dependant
-Plugin 'honza/vim-snippets' " Snippets are separated from the engine.
-Plugin 'mattn/emmet-vim' " html/css parser engine - this or snippets?
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " replaced by fuzzy finder
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
+"Plug 'mattn/emmet-vim' " html/css parser engine - this or snippets?
 
 " Experimental - to try
-"Plugin 'justinmk/vim-sneak'
-Plugin 'gregsexton/gitv'
-"Plugin 'tpope/vim-commentary' " which to use?
-"Plugin 'tomtom/tcomment_vim'
+"Plug 'justinmk/vim-sneak'
+"Plug 'gregsexton/gitv'
+"Plug 'tpope/vim-commentary' " which to use?
+"Plug 'tomtom/tcomment_vim'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+call plug#end()
 
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" see :h vundle for more details or wiki for FAQ
-"__________________________________________________________________________________________
-
-" TODO: Make a github repo for personalized snippets, manage it via vundle.
+" TODO: Make a github repo for personalized snippets, manage it via package
+" mangager
 " Git push after updating a snippet
 " Make seperate github repo for spellcheck file, managed via vundle 
 
 " My colors
-if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
-  set t_Co=256
-endif
 colors mustang
 syntax enable
-"let &t_Co=256
 
 set shellcmdflag=-ic  " Make shell behave like my command prompt - load the rc's 
-set ttyfast " improve buffer-update speed
+set hidden " I'm ok with hidden buffers. No warning flags please
 
-"set hidden " I'm ok with hidden buffers. No warning flags please
+" more natural splits
+set splitbelow
+set splitright
 
 " Set indent = 4 spaces
 filetype plugin indent on
@@ -71,6 +51,7 @@ set shiftwidth=4
 set expandtab
 set ff=unix
 
+" Folding
 " augroup vimrc
 "   autocmd!
 "   au BufReadPre * setlocal foldmethod=indent
