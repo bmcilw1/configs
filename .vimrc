@@ -16,6 +16,8 @@ Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
 
 " Keepers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " mostly replaced by fuzzy finder
+
+" Also use nerdtree if opening a directory
 augroup nerd_loader
   autocmd!
   autocmd VimEnter * silent! autocmd! FileExplorer
