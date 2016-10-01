@@ -28,7 +28,9 @@ augroup nerd_loader
         \| endif
 augroup END
 
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
+if has('python')
+    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
+endif
 "Plug 'mattn/emmet-vim' " html/css parser engine - this or snippets?
 
 " Experimental - to try
