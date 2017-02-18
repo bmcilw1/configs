@@ -14,13 +14,13 @@ call plug#begin('~/.vim/bundle')
 " Core
 Plug 'bmcilw1/mustang-vim'
 Plug 'tpope/vim-surround' " Essential
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive' " Awesome git wrapper
+Plug 'tpope/vim-obsession' " Save my vim sessions
 Plug 'tpope/vim-unimpaired' " For navigating quickfix
-Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
+Plug 'kien/ctrlp.v/im', { 'on': 'CtrlP' } " Go fuzzy
 
 " Keepers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " mostly replaced by fuzzy finder
-
 
 if has('python')
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
