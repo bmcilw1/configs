@@ -5,3 +5,7 @@
 	email = brianwmcilwain@gmail.com
 [color]
 	ui = auto
+[push]
+	default = matching
+[core]
+	trustctime = false
