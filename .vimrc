@@ -17,7 +17,7 @@ Plug 'tpope/vim-surround' " Essential
 Plug 'tpope/vim-fugitive' " Awesome git wrapper
 Plug 'tpope/vim-obsession' " Save my vim sessions
 Plug 'tpope/vim-unimpaired' " For navigating quickfix
-Plug 'kien/ctrlp.v/im', { 'on': 'CtrlP' } " Go fuzzy
+Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
 
 " Keepers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " mostly replaced by fuzzy finder
