@@ -3,3 +3,5 @@
 # Please adapt and uncomment the following lines:
 	name = Brian McIlwain
 	email = brianwmcilwain@gmail.com
+[color]
+	ui = auto
