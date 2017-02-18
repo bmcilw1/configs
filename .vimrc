@@ -39,15 +39,13 @@ call plug#end()
 colors mustang
 syntax enable
 
-" Syntax
+" Gui
 set guifont=Lucida_Console:h11
+au GUIEnter * simalt ~x " gui full screen please
 
-" eof chars etc. All fine
+" TODO: check on win
 scriptencoding utf-8
 set encoding=utf-8
-
-" gui full screen please
-au GUIEnter * simalt ~x
 
 " ----------- The Feel ------------------------
 " more natural splits
@@ -91,6 +89,7 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>h :hide<CR>
 
+" Constant vimrc access
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
