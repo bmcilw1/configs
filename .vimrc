@@ -42,9 +42,10 @@ syntax enable
 " Gui
 set guifont=Lucida_Console:h11
 au GUIEnter * simalt ~x " gui full screen please
-set guioptions-=m  " hide menu bar
-set guioptions-=T  " hide toolbar
-set guioptions-=r  " hide scrollbar
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
 
 " TODO: check on win
 scriptencoding utf-8
