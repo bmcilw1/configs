@@ -62,8 +62,8 @@ set shiftwidth=4
 set expandtab
 
 " ----------- Fix Vim defaults ------------------------
-setlocal spell! spelllang=en_us "How two spel?
-set hidden " I'm ok with hidden buffers. No warning flags please
+set spelllang=en_us "How two spel?
+set hidden " I'm OK with hidden buffers. No warning flags please
 set noswapfile " Prevent vim from creating unwanted temp files - I got vcs
 set autochdir " Make currently opened file the current open directory on bash
 set lazyredraw " stop vim redraw during complex operations
@@ -85,6 +85,9 @@ inoremap ;; <esc>
 
 " Toggle highlighting on/off, and show current value.
 nnoremap <leader>hl :set hlsearch! hlsearch?<CR>
+
+" Spelling
+nnoremap <leader>sp :set spell!<CR>
 
 " File tasks
 nnoremap <leader>Q :q!<CR>
