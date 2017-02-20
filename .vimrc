@@ -111,9 +111,9 @@ set listchars=tab:▸\ ,eol:¬
 
 " Build and run project
 if expand('%:e') == 'cs'
-    nnoremap <F4> :ProjectRootExe !msbuild
-    nnoremap <F3> :ProjectRootExe !msbuild /t:Rebuild
-    "TODO: get the path of build from msbuild
+    nnoremap <F4> :ProjectRootExe !msbuild<CR>
+    nnoremap <F3> :ProjectRootExe !msbuild /t:Rebuild<CR>
+    " TODO: get the path of build from msbuild
     nnoremap <F5> :ProjectRootExe !OutlookCRM\bin\Datafiche.exe<CR>
 endif
 
