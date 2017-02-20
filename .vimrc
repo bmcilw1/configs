@@ -110,12 +110,15 @@ nnoremap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 
 " Build and run project
+augroup build_loader
+" TODO: build conditonal to file type 
 if expand('%:e') == 'cs'
-    nnoremap <F4> :ProjectRootExe !msbuild<CR>
-    nnoremap <F3> :ProjectRootExe !msbuild /t:Rebuild<CR>
-    " TODO: get the path of build from msbuild
-    nnoremap <F5> :ProjectRootExe !OutlookCRM\bin\Datafiche.exe<CR>
 endif
+    autocmd BufEnter,BufNew * nmap <F4> :ProjectRootExe !msbuild<CR>
+    autocmd BufEnter,BufNew * nmap <F3> :ProjectRootExe !msbuild /t:Rebuild<CR>
+    " TODO: get the path of build from msbuild
+    autocmd BufEnter,BufNew * nmap <F5> :ProjectRootExe !OutlookCRM\bin\Datafiche.exe<CR>
+augroup END
 
 " Folding
 " augroup vimrc
