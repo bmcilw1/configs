@@ -15,12 +15,15 @@ call plug#begin('~/.vim/bundle')
 Plug 'bmcilw1/mustang-vim'
 Plug 'tpope/vim-surround' " Essential
 Plug 'tpope/vim-fugitive' " Awesome git wrapper
-Plug 'tpope/vim-obsession' " Save my vim sessions
 Plug 'tpope/vim-unimpaired' " For navigating quickfix
 Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
 
+Plug 'xolox/vim-misc' " dependency
+Plug 'xolox/vim-session' " Save my vim sessions
+
 " Keepers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " mostly replaced by fuzzy finder
+Plug 'ap/vim-css-color' " Show color codes as color
 
 if has('python')
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
@@ -141,3 +144,11 @@ augroup END
 
 " Quit NERDTree if it is the last buffer open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Vim-Session
+set sessionoptions-=help " Don't save help files
+
+" Auto-restore last closed session
+let g:session_autoload = 'yes'
+let g:session_autosave = 'yes'
+let g:session_verbose_messages = 0
