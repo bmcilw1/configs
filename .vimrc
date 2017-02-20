@@ -25,6 +25,8 @@ Plug 'xolox/vim-session' " Save my vim sessions
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " mostly replaced by fuzzy finder
 Plug 'ap/vim-css-color' " Show color codes as color
 
+Plug 'dbakker/vim-projectroot' "get project directory
+
 if has('python')
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
 endif
@@ -106,6 +108,14 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 " Show invisible characters, tab and new line
 nnoremap <leader>l :set list!<CR> 
 set listchars=tab:▸\ ,eol:¬
+
+" Build and run project
+if expand('%:e') == 'cs'
+    nnoremap <F4> :ProjectRootExe !msbuild
+    nnoremap <F3> :ProjectRootExe !msbuild /t:Rebuild
+    "TODO: get the path of build from msbuild
+    nnoremap <F5> :ProjectRootExe !OutlookCRM\bin\Datafiche.exe<CR>
+endif
 
 " Folding
 " augroup vimrc
