@@ -16,16 +16,16 @@ Plug 'bmcilw1/mustang-vim'
 Plug 'tpope/vim-surround' " Essential
 Plug 'tpope/vim-fugitive' " Awesome git wrapper
 Plug 'tpope/vim-unimpaired' " For navigating quickfix
-Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
-
-Plug 'xolox/vim-misc' " dependency
+Plug 'xolox/vim-misc' " Dependency to vim-session
 Plug 'xolox/vim-session' " Save my vim sessions
 
 " Keepers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " mostly replaced by fuzzy finder
 Plug 'ap/vim-css-color' " Show color codes as color
-
 Plug 'dbakker/vim-projectroot' "get project directory
+Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
+"Plug 'cosminadrianpopescu/vim-sql-workbench' " Sql interface
+Plug 'vim-scripts/dbext.vim' " Sql interface
 
 if has('python')
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
@@ -162,6 +162,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 set sessionoptions-=help " Don't save help files
 
 " Auto-restore last closed session
-let g:session_autoload = 'yes'
-let g:session_autosave = 'yes'
-let g:session_verbose_messages = 0
+let g:session_autoload='yes'
+let g:session_autosave='yes'
+let g:session_verbose_messages=0
+
+" Sql Editor
+let g:dbext_default_profile_mySqlServer = 'type=SQLSRV:integratedlogin=1:srvname=localhost\SQLEXPRESS:dbname=Datafiche2016v2_DEV'
+let g:dbext_default_profile='mySqlServer'
