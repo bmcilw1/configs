@@ -111,9 +111,9 @@ nnoremap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 
 " Build and run project
-autocmd BufEnter * nnoremap <buffer> <silent> <F3> :call <SID>f3()<CR>
-autocmd BufEnter * nnoremap <buffer> <silent> <F4> :call <SID>f4()<CR>
-autocmd BufEnter * nnoremap <buffer> <silent> <F5> :call <SID>f5()<CR>
+autocmd BufNew * nnoremap <buffer> <silent> <F3> :call <SID>f3()<CR>
+autocmd BufNew * nnoremap <buffer> <silent> <F4> :call <SID>f4()<CR>
+autocmd BufNew * nnoremap <buffer> <silent> <F5> :call <SID>f5()<CR>
 
 function! s:f3()
     if expand('%:e') == 'cs'
