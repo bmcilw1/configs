@@ -100,6 +100,7 @@ nnoremap <leader>Q :q!<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>h :hide<CR>
+nnoremap <leader>bd :bd<CR>
 
 " Constant vimrc access
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
@@ -110,15 +111,28 @@ nnoremap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 
 " Build and run project
-augroup build_loader
-" TODO: build conditonal to file type 
-if expand('%:e') == 'cs'
-endif
-    autocmd BufEnter,BufNew * nmap <F4> :ProjectRootExe !msbuild<CR>
-    autocmd BufEnter,BufNew * nmap <F3> :ProjectRootExe !msbuild /t:Rebuild<CR>
+autocmd BufEnter * nnoremap <buffer> <silent> <F3> :call <SID>f3()<CR>
+autocmd BufEnter * nnoremap <buffer> <silent> <F4> :call <SID>f4()<CR>
+autocmd BufEnter * nnoremap <buffer> <silent> <F5> :call <SID>f5()<CR>
+
+function! s:f3()
+    if expand('%:e') == 'cs'
+       ProjectRootExe !msbuild /t:Rebuild
+    endif
+endfunction
+function! s:f4()
+    if expand('%:e') == 'cs' || expand('%:e') == 'sql'
+       ProjectRootExe !msbuild
+    endif
+endfunction
+function! s:f5()
+    if expand('%:e') == 'cs'
     " TODO: get the path of build from msbuild
-    autocmd BufEnter,BufNew * nmap <F5> :ProjectRootExe !OutlookCRM\bin\Datafiche.exe<CR>
-augroup END
+       ProjectRootExe !OutlookCRM\bin\Datafiche.exe
+    elseif expand('%:e') == 'py'
+       ProjectRootExe !python %
+    endif
+endfunction
 
 " Folding
 " augroup vimrc
