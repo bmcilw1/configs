@@ -82,6 +82,7 @@ if has('unix')
     set ff=unix " Unix line endings on unix
 endif
 
+
 " ----------- Custom shortcuts ------------------------
 let mapleader = " " " Set mapleader, backslash is the default 
 
@@ -100,7 +101,7 @@ nnoremap <leader>Q :q!<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>h :hide<CR>
-nnoremap <leader>bd :bd<CR>
+nnoremap <leader>d :bd<CR>
 
 " Constant vimrc access
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
@@ -108,7 +109,7 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Show invisible characters, tab and new line
 nnoremap <leader>l :set list!<CR> 
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:►\ ,eol:¬
 
 " Build and run project
 autocmd BufNew * nnoremap <buffer> <silent> <F3> :call <SID>f3()<CR>
@@ -168,6 +169,8 @@ augroup nerd_loader
         \|   execute 'autocmd! nerd_loader'
         \| endif
 augroup END
+
+let g:NERDTreeWinSize = 30 
 
 " Quit NERDTree if it is the last buffer open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
