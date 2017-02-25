@@ -163,12 +163,6 @@ let g:session_verbose_messages=0
 let g:dbext_default_profile_mySqlServer = 'type=SQLSRV:integratedlogin=1:srvname=localhost\SQLEXPRESS:dbname=Datafiche2016v2_DEV'
 let g:dbext_default_profile='mySqlServer'
 
-" Rooter
-let g:rooter_silent_chdir = 1
-let g:rooter_use_lcd = 1
-let g:rooter_change_directory_for_non_project_files = 'current'
-let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', '*.sln']
-
 " Build and run project
 augroup Build_Tools
     autocmd BufNew,BufEnter * nnoremap <buffer> <silent> <F3> :call <SID>f3()<CR>
