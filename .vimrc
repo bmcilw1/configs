@@ -22,7 +22,7 @@ Plug 'xolox/vim-session' " Save my vim sessions
 " Keepers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " mostly replaced by fuzzy finder
 Plug 'ap/vim-css-color' " Show color codes as color
-Plug 'dbakker/vim-projectroot' "get project directory
+Plug 'airblade/vim-rooter' "get project directory
 Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
 "Plug 'cosminadrianpopescu/vim-sql-workbench' " Sql interface
 Plug 'vim-scripts/dbext.vim' " Sql interface
@@ -111,30 +111,6 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>l :set list!<CR> 
 set listchars=tab:►\ ,eol:¬
 
-" Build and run project
-autocmd BufNew * nnoremap <buffer> <silent> <F3> :call <SID>f3()<CR>
-autocmd BufNew * nnoremap <buffer> <silent> <F4> :call <SID>f4()<CR>
-autocmd BufNew * nnoremap <buffer> <silent> <F5> :call <SID>f5()<CR>
-
-function! s:f3()
-    if expand('%:e') == 'cs'
-       ProjectRootExe !msbuild /t:Rebuild
-    endif
-endfunction
-function! s:f4()
-    if expand('%:e') == 'cs' || expand('%:e') == 'sql'
-       ProjectRootExe !msbuild
-    endif
-endfunction
-function! s:f5()
-    if expand('%:e') == 'cs'
-    " TODO: get the path of build from msbuild
-       ProjectRootExe !OutlookCRM\bin\Datafiche.exe
-    elseif expand('%:e') == 'py'
-       ProjectRootExe !python %
-    endif
-endfunction
-
 " Folding
 " augroup vimrc
 "   autocmd!
@@ -186,3 +162,37 @@ let g:session_verbose_messages=0
 " Sql Editor
 let g:dbext_default_profile_mySqlServer = 'type=SQLSRV:integratedlogin=1:srvname=localhost\SQLEXPRESS:dbname=Datafiche2016v2_DEV'
 let g:dbext_default_profile='mySqlServer'
+
+" Rooter
+let g:rooter_silent_chdir = 1
+let g:rooter_use_lcd = 1
+let g:rooter_change_directory_for_non_project_files = 'current'
+let g:rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/', '*.sln']
+
+" Build and run project
+augroup Build_Tools
+    autocmd BufNew,BufEnter * nnoremap <buffer> <silent> <F3> :call <SID>f3()<CR>
+    autocmd BufNew,BufEnter * nnoremap <buffer> <silent> <F4> :call <SID>f4()<CR>
+    autocmd BufNew,BufEnter * nnoremap <buffer> <silent> <F5> :call <SID>f5()<CR>
+augroup END
+
+function! s:f3()
+    if expand('%:e') ==? 'cs'
+       !msbuild /t:Rebuild
+    endif
+endfunction
+function! s:f4()
+    if expand('%:e') ==? 'cs' || expand('%:e') ==? 'sql'
+       !msbuild
+    endif
+endfunction
+function! s:f5()
+    if expand('%:e') ==? 'py'
+       ! python %
+    elseif expand('%:e') ==? 'html' || expand('%:e') == 'htm'
+       ! start %
+    elseif expand('%:e') ==? 'cs'
+    " TODO: get the path of build from msbuild
+       ! OutlookCRM\bin\Datafiche.exe
+    endif
+endfunction
