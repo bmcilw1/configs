@@ -22,7 +22,7 @@ Plug 'xolox/vim-session' " Save my vim sessions
 " Keepers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " mostly replaced by fuzzy finder
 Plug 'ap/vim-css-color' " Show color codes as color
-Plug 'airblade/vim-rooter' "get project directory
+Plug 'dbakker/vim-projectroot' "get project directory
 Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
 "Plug 'cosminadrianpopescu/vim-sql-workbench' " Sql interface
 Plug 'vim-scripts/dbext.vim' " Sql interface
@@ -178,21 +178,21 @@ augroup END
 
 function! s:f3()
     if expand('%:e') ==? 'cs'
-       !msbuild /t:Rebuild
+       ProjectRootExe ! msbuild /t:Rebuild
     endif
 endfunction
 function! s:f4()
     if expand('%:e') ==? 'cs' || expand('%:e') ==? 'sql'
-       !msbuild
+       ProjectRootExe ! msbuild
     endif
 endfunction
 function! s:f5()
     if expand('%:e') ==? 'py'
-       ! python %
+       ProjectRootExe ! python %
     elseif expand('%:e') ==? 'html' || expand('%:e') == 'htm'
-       ! start %
+       ProjectRootExe ! start %
     elseif expand('%:e') ==? 'cs'
     " TODO: get the path of build from msbuild
-       ! OutlookCRM\bin\Datafiche.exe
+       ProjectRootExe ! OutlookCRM\bin\Datafiche.exe
     endif
 endfunction
