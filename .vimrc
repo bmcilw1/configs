@@ -5,7 +5,9 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  augroup InstallPlug
+      autocmd! VimEnter * PlugInstall --sync | source $MYVIMRC
+  augroup END
 endif
 
 " Plugins by vim-plug
@@ -111,12 +113,42 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>l :set list!<CR> 
 set listchars=tab:►\ ,eol:¬
 
-" Folding
-" augroup vimrc
-"   autocmd!
-"   au BufReadPre * setlocal foldmethod=indent
-"   "au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-" augroup END
+" Launch non-text files externally
+function! s:launch()
+    if expand('%:e') ==? 'py'
+        ProjectRootExe ! python %
+    elseif expand('%:e') ==? 'html' || expand('%:e') == 'htm' || expand('%:e') ==? 'pdf'
+        if has('win32')
+            ProjectRootExe ! start %
+        endif
+    elseif expand('%:e') ==? 'cs'
+    " TODO: get the path of build from msbuild
+        ProjectRootExe ! OutlookCRM\bin\Datafiche.exe
+    endif
+endfunction
+
+augroup Startup_Open
+    autocmd! BufReadPost *.pdf :call <SID>launch()
+augroup END
+
+" Build and run project
+augroup Build_Tools
+    autocmd!
+    autocmd BufEnter * nnoremap <buffer> <silent> <F3> :call <SID>f3()<CR>
+    autocmd BufEnter * nnoremap <buffer> <silent> <F4> :call <SID>f4()<CR>
+    autocmd BufEnter * nnoremap <buffer> <silent> <F5> :call <SID>launch()<CR>
+augroup END
+
+function! s:f3()
+    if expand('%:e') ==? 'cs'
+       ProjectRootExe ! msbuild /t:Rebuild
+    endif
+endfunction
+function! s:f4()
+    if expand('%:e') ==? 'cs' || expand('%:e') ==? 'sql'
+       ProjectRootExe ! msbuild
+    endif
+endfunction
 
 " ----------- Plugin settings ------------------------
 " Ctrl-P
@@ -162,31 +194,3 @@ let g:session_verbose_messages=0
 " Sql Editor
 let g:dbext_default_profile_mySqlServer = 'type=SQLSRV:integratedlogin=1:srvname=localhost\SQLEXPRESS:dbname=Datafiche2016v2_DEV'
 let g:dbext_default_profile='mySqlServer'
-
-" Build and run project
-augroup Build_Tools
-    autocmd BufNew,BufEnter * nnoremap <buffer> <silent> <F3> :call <SID>f3()<CR>
-    autocmd BufNew,BufEnter * nnoremap <buffer> <silent> <F4> :call <SID>f4()<CR>
-    autocmd BufNew,BufEnter * nnoremap <buffer> <silent> <F5> :call <SID>f5()<CR>
-augroup END
-
-function! s:f3()
-    if expand('%:e') ==? 'cs'
-       ProjectRootExe ! msbuild /t:Rebuild
-    endif
-endfunction
-function! s:f4()
-    if expand('%:e') ==? 'cs' || expand('%:e') ==? 'sql'
-       ProjectRootExe ! msbuild
-    endif
-endfunction
-function! s:f5()
-    if expand('%:e') ==? 'py'
-       ProjectRootExe ! python %
-    elseif expand('%:e') ==? 'html' || expand('%:e') == 'htm'
-       ProjectRootExe ! start %
-    elseif expand('%:e') ==? 'cs'
-    " TODO: get the path of build from msbuild
-       ProjectRootExe ! OutlookCRM\bin\Datafiche.exe
-    endif
-endfunction
