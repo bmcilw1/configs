@@ -20,6 +20,7 @@ Plug 'tpope/vim-fugitive' " Awesome git wrapper
 Plug 'tpope/vim-unimpaired' " For navigating quickfix
 Plug 'xolox/vim-misc' " Dependency to vim-session
 Plug 'xolox/vim-session' " Save my vim sessions
+Plug 'vim-scripts/BufOnly.vim' " Manage buffer trash
 
 " Keepers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " mostly replaced by fuzzy finder
@@ -114,21 +115,24 @@ nnoremap <leader>l :set list!<CR>
 set listchars=tab:►\ ,eol:¬
 
 " Launch non-text files externally
-function! s:launch()
+function! Launch()
     if expand('%:e') ==? 'py'
         ProjectRootExe ! python %
-    elseif expand('%:e') ==? 'html' || expand('%:e') == 'htm' || expand('%:e') ==? 'pdf'
-        if has('win32')
-            ProjectRootExe ! start %
-        endif
     elseif expand('%:e') ==? 'cs'
     " TODO: get the path of build from msbuild
         ProjectRootExe ! OutlookCRM\bin\Datafiche.exe
+    elseif expand('%:e') ==? 'js'
+        ProjectRootExe ! node index.js
+    else
+        if has('win32')
+            ProjectRootExe ! start %
+        endif
     endif
 endfunction
 
 augroup Startup_Open
-    autocmd! BufReadPost *.pdf :call <SID>launch()
+    autocmd!
+    autocmd BufReadPost *.jpg,*.pdf,*.png :call Launch()
 augroup END
 
 " Build and run project
@@ -136,7 +140,7 @@ augroup Build_Tools
     autocmd!
     autocmd BufEnter * nnoremap <buffer> <silent> <F3> :call <SID>f3()<CR>
     autocmd BufEnter * nnoremap <buffer> <silent> <F4> :call <SID>f4()<CR>
-    autocmd BufEnter * nnoremap <buffer> <silent> <F5> :call <SID>launch()<CR>
+    autocmd BufEnter * nnoremap <buffer> <silent> <F5> :call Launch()<CR>
 augroup END
 
 function! s:f3()
