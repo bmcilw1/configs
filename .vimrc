@@ -94,7 +94,8 @@ set timeoutlen=350 ttimeoutlen=0 "Timeout for waiting for multiple keys for bind
 inoremap ;; <esc> 
 
 " Toggle highlighting on/off, and show current value.
-nnoremap <leader>hl :set hlsearch! hlsearch?<CR>
+nnoremap <leader>hl :set hlsearch!<CR>
+set nohlsearch
 
 " Spelling
 nnoremap <leader>sp :set spell!<CR>
