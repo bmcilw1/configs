@@ -17,6 +17,6 @@ Copy/paste script:
 cd ~
 git clone https://github.com/bmcilw1/configs.git ~ && cp -r ~/configs/. ~/. && rm -rf ~/configs
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-source .bashrc
+source ~/.bashrc
 vim -c PlugInstall
 ```
