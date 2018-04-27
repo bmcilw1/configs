@@ -2,6 +2,7 @@
 *
 
 # Except these
+!.config/nvim/
 !.vimrc
 !.inputrc
 !.bash_profile

@@ -30,6 +30,9 @@ Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' } " Go fuzzy
 "Plug 'cosminadrianpopescu/vim-sql-workbench' " Sql interface
 Plug 'vim-scripts/dbext.vim' " Sql interface
 
+" Syntax
+Plug 'leafgarland/typescript-vim' " Give me .ts syntax highlights
+
 if has('python')
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
 endif
@@ -199,3 +202,6 @@ let g:session_verbose_messages=0
 " Sql Editor
 let g:dbext_default_profile_mySqlServer = 'type=SQLSRV:integratedlogin=1:srvname=localhost\SQLEXPRESS:dbname=Datafiche2016v2_DEV'
 let g:dbext_default_profile='mySqlServer'
+
+" Terminal
+tnoremap <Esc> <C-\><C-n>
