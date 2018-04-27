@@ -204,4 +204,6 @@ let g:dbext_default_profile_mySqlServer = 'type=SQLSRV:integratedlogin=1:srvname
 let g:dbext_default_profile='mySqlServer'
 
 " Terminal
+nnoremap <leader>t :new<CR>:terminal<CR>GAsource $HOME/.bash_profile<CR>cl<CR>
 tnoremap <Esc> <C-\><C-n>
+"let &shell='/usr/bin/bash --login'
