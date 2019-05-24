@@ -3,7 +3,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 if [ -f ~/.bashrc ]; then
-    source .bashrc
+    source ~/.bashrc
 fi
 
 #if nvim_loc="$(type -p "$nvim")" || [ -z "$nvim_loc" ]; then
