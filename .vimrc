@@ -33,9 +33,9 @@ Plug 'vim-scripts/dbext.vim' " Sql interface
 " Syntax
 Plug 'leafgarland/typescript-vim' " Give me .ts syntax highlights
 
-if has('python')
-    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
-endif
+"if has('python')
+"   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Python dependant
+"endif
 
 " Experimental - to try
 "Plug 'justinmk/vim-sneak'
